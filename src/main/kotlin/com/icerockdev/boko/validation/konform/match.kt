@@ -2,7 +2,7 @@
  * Copyright 2022 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package com.icerockdev.konformConstraints
+package com.icerockdev.boko.validation.konform
 
 import io.konform.validation.Constraint
 import io.konform.validation.ValidationBuilder
@@ -12,17 +12,10 @@ import io.konform.validation.ValidationBuilder
  *
  * Example of password matching:
  * ```
- * // NOTE: Using match in object ValidationBuilder context
- * val passwordsMatchConstraint = match {
- *    password == passwordRepeat
- * } hint "values must match"
- *
  * Request::password required {
- *   rule { passwordsMatchConstraint }
+ *   match { password == passwordRepeat } hint "passwords must match"
  * }
  * ```
- *
- * @see [com.icerockdev.konformConstraints.extension.rule]
  */
 fun <T> ValidationBuilder<T>.match(matcher: T.() -> Boolean): Constraint<T> {
     return addConstraint("values must match") { it.matcher() }

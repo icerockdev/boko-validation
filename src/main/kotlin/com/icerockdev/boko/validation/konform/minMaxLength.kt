@@ -2,7 +2,7 @@
  * Copyright 2022 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package com.icerockdev.konformConstraints
+package com.icerockdev.boko.validation.konform
 
 import io.konform.validation.Constraint
 import io.konform.validation.ValidationBuilder
@@ -19,6 +19,8 @@ import io.konform.validation.ValidationBuilder
  */
 fun ValidationBuilder<String>.minMaxLength(min: Int, max: Int): Constraint<String> {
     require(min >= 0 && max >= 0) { "minMaxLength requires the min and max to be >= 0" }
+    require(min < max) { "minMaxLength requires the min should be less than max" }
+
     return addConstraint(
         "must have at least {0} and most {1} characters",
         min.toString(),

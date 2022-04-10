@@ -13,7 +13,7 @@ plugins {
     id("signing")
 }
 
-group = "com.icerockdev"
+group = "com.icerockdev.boko"
 version = "0.1.0"
 
 val sourcesJar by tasks.registering(Jar::class) {
@@ -22,6 +22,7 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -30,8 +31,11 @@ dependencies {
     val jodaTimeVersion: String by project
 
     implementation(kotlin("stdlib"))
-    implementation("io.konform:konform:$konformVersion")
+    api("io.konform:konform:$konformVersion")
     implementation("joda-time:joda-time:$jodaTimeVersion")
+
+    testImplementation("io.konform:konform:$konformVersion")
+    testImplementation(kotlin("test"))
 }
 
 java {
@@ -43,6 +47,12 @@ java {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+}
+
+tasks.withType<Test> {
+    testLogging {
+        events("passed", "skipped", "failed")
     }
 }
 
@@ -60,15 +70,15 @@ publishing {
             from(components["java"])
             artifact(sourcesJar.get())
             pom {
-                name.set("Konform constraints")
-                description.set("Constraints for konform validations")
-                url.set("https://github.com/icerockdev/konform-constraints")
+                name.set("Boko validations")
+                description.set("Konform based validation for Kotlin/JVM")
+                url.set("https://github.com/icerockdev/boko-validation")
                 inceptionYear.set("2022")
 
                 licenses {
                     license {
                         name.set("Apache License 2.0")
-                        url.set("https://github.com/icerockdev/konform-constraints/blob/master/LICENSE.md")
+                        url.set("https://github.com/icerockdev/boko-validation/blob/master/LICENSE.md")
                     }
                 }
 
@@ -81,9 +91,9 @@ publishing {
                 }
 
                 scm {
-                    connection.set("scm:git:ssh://github.com/icerockdev/konform-constraints.git")
-                    developerConnection.set("scm:git:ssh://github.com/icerockdev/konform-constraints.git")
-                    url.set("https://github.com/icerockdev/konform-constraints")
+                    connection.set("scm:git:ssh://github.com/icerockdev/boko-validation.git")
+                    developerConnection.set("scm:git:ssh://github.com/icerockdev/boko-validation.git")
+                    url.set("https://github.com/icerockdev/boko-validation")
                 }
             }
         }

@@ -2,7 +2,7 @@
  * Copyright 2022 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package com.icerockdev.konformConstraints
+package com.icerockdev.boko.validation.konform
 
 import io.konform.validation.Constraint
 import io.konform.validation.ValidationBuilder

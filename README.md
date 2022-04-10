@@ -1,6 +1,9 @@
-# Validation rules for konform
+# Backend Kotlin Validation
+### Konform based validation for Kotlin/JVM
 
-[konform](https://github.com/konform-kt/konform)
+## Dependencies
+- [Konform](https://github.com/konform-kt/konform)
+- [Joda-Time](https://github.com/JodaOrg/joda-time)
 
 ## Installation
 
@@ -11,8 +14,7 @@ repositories {
 }
 
 // Append dependency
-implementation("io.konform:konform:X.X.X")
-implementation("com.icerockdev:konform-constraints:0.1.0")
+implementation("com.icerockdev.boko:validation:0.1.0")
 ````
 
 ## Usage
@@ -20,19 +22,16 @@ implementation("com.icerockdev:konform-constraints:0.1.0")
 See [konform](https://github.com/konform-kt/konform) docs for more information
 
 Available constraints:
-- [date](src/main/kotlin/com/icerockdev/konformConstraints/date.kt) - Constraint for validate string for minimum and maximum length
-- [email](src/main/kotlin/com/icerockdev/konformConstraints/email.kt) - Constraint for validate email address
-- [inList](src/main/kotlin/com/icerockdev/konformConstraints/inList.kt) - Constraint for validate that the value is in list
-- [inRange](src/main/kotlin/com/icerockdev/konformConstraints/inRange.kt) - Constraint for validate that the value is in the range
-- [match](src/main/kotlin/com/icerockdev/konformConstraints/match.kt) - Constraint for validate by any matching rule
-- [minMaxLength](src/main/kotlin/com/icerockdev/konformConstraints/minMaxLength.kt) - Constraint for validate string for minimum and maximum length
-
-Available extension:
-- [rule](src/main/kotlin/com/icerockdev/konformConstraints/extension/rule.kt) - Apply externally created constraint
+- [date](src/main/kotlin/com/icerockdev/boko/validation/konform/date.kt) - Constraint for validate string for minimum and maximum length
+- [email](src/main/kotlin/com/icerockdev/boko/validation/konform/email.kt) - Constraint for validate email address
+- [inList](src/main/kotlin/com/icerockdev/boko/validation/konform/inList.kt) - Constraint for validate that the value is in list
+- [inRange](src/main/kotlin/com/icerockdev/boko/validation/konform/inRange.kt) - Constraint for validate that the value is in the range
+- [match](src/main/kotlin/com/icerockdev/boko/validation/konform/match.kt) - Constraint for validate by any matching rule
+- [minMaxLength](src/main/kotlin/com/icerockdev/boko/validation/konform/minMaxLength.kt) - Constraint for validate string for minimum and maximum length
 
 ## TODO
 
-- [ ] Add tests
+- [x] Add tests
 
 ## Contributing
 
