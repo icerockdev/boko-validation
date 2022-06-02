@@ -32,6 +32,7 @@ Available constraints:
 ## TODO
 
 - [x] Add tests
+- [x] Add localization support
 
 ## Contributing
 

@@ -7,6 +7,7 @@ package com.icerockdev.boko.validation
 import io.konform.validation.Validation
 import io.konform.validation.ValidationError
 import io.konform.validation.ValidationResult
+import java.util.Locale
 
 class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     private var executed = false
@@ -14,7 +15,7 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     private val errors = mutableSetOf<ValidationError>()
 
     fun getErrors(): Map<String, String> {
-        if (!executed) throw RuntimeException("For get error list run validate method first.")
+        if (!executed) throw BokoValidationException("For get error list run validate method first.")
 
         return errors.associate {
             it.dataPath to it.message
@@ -22,7 +23,7 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     }
 
     fun valid() : Boolean {
-        if (!executed) throw RuntimeException("For get validation result run validate method first.")
+        if (!executed) throw BokoValidationException("For get validation result run validate method first.")
 
         return errors.isEmpty()
     }
@@ -39,4 +40,10 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     }
 
     operator fun invoke(value: T) = validate(value)
+
+    companion object {
+        fun <T> localizedBokoValidation(init: (locale: Locale?) -> BokoValidation<T>): (locale: Locale?) -> BokoValidation<T> {
+            return { init(it) }
+        }
+    }
 }

@@ -29,6 +29,7 @@ repositories {
 dependencies {
     val konformVersion: String by project
     val jodaTimeVersion: String by project
+    val junitVersion: String by project
 
     implementation(kotlin("stdlib"))
     api("io.konform:konform:$konformVersion")
@@ -36,6 +37,8 @@ dependencies {
 
     testImplementation("io.konform:konform:$konformVersion")
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+
 }
 
 java {
