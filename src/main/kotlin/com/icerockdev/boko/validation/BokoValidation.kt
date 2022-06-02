@@ -7,6 +7,7 @@ package com.icerockdev.boko.validation
 import io.konform.validation.Validation
 import io.konform.validation.ValidationError
 import io.konform.validation.ValidationResult
+import java.util.Locale
 
 class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     private var executed = false
@@ -39,4 +40,10 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     }
 
     operator fun invoke(value: T) = validate(value)
+
+    companion object {
+        fun <T> localizedBokoValidation(init: (locale: Locale?) -> BokoValidation<T>): (locale: Locale?) -> BokoValidation<T> {
+            return { init(it) }
+        }
+    }
 }
