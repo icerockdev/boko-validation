@@ -15,7 +15,7 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     private val errors = mutableSetOf<ValidationError>()
 
     fun getErrors(): Map<String, String> {
-        if (!executed) throw RuntimeException("For get error list run validate method first.")
+        if (!executed) throw BokoValidationException("For get error list run validate method first.")
 
         return errors.associate {
             it.dataPath to it.message
@@ -23,7 +23,7 @@ class BokoValidation<T>(private val init: T.() -> Validation<T>) {
     }
 
     fun valid() : Boolean {
-        if (!executed) throw RuntimeException("For get validation result run validate method first.")
+        if (!executed) throw BokoValidationException("For get validation result run validate method first.")
 
         return errors.isEmpty()
     }

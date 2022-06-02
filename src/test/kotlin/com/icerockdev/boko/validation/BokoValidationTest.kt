@@ -10,6 +10,8 @@ import io.konform.validation.Valid
 import io.konform.validation.Validation
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import org.junit.jupiter.api.assertDoesNotThrow
 
 internal class BokoValidationTest {
 
@@ -26,7 +28,20 @@ internal class BokoValidationTest {
             }
         }
 
+        assertFailsWith<BokoValidationException> {
+            validation.valid()
+        }
+
+        assertFailsWith<BokoValidationException> {
+            validation.getErrors()
+        }
+
         assertEquals(Valid(ChangePasswordRequest()), validation(ChangePasswordRequest()))
+
+        assertDoesNotThrow {
+            validation.valid()
+            validation.getErrors()
+        }
 
         assertEquals(
             "First name must be minimum 5 and maximum 10 characters",
